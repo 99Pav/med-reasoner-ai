@@ -14,7 +14,86 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      conversations: {
+        Row: {
+          created_at: string
+          disease_context: string | null
+          id: string
+          user_session_id: string
+        }
+        Insert: {
+          created_at?: string
+          disease_context?: string | null
+          id?: string
+          user_session_id: string
+        }
+        Update: {
+          created_at?: string
+          disease_context?: string | null
+          id?: string
+          user_session_id?: string
+        }
+        Relationships: []
+      }
+      messages: {
+        Row: {
+          content: Json
+          conversation_id: string
+          created_at: string
+          id: string
+          role: string
+        }
+        Insert: {
+          content: Json
+          conversation_id: string
+          created_at?: string
+          id?: string
+          role: string
+        }
+        Update: {
+          content?: Json
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_profiles: {
+        Row: {
+          created_at: string
+          disease_of_interest: string | null
+          id: string
+          location: string | null
+          name: string | null
+          session_id: string
+        }
+        Insert: {
+          created_at?: string
+          disease_of_interest?: string | null
+          id?: string
+          location?: string | null
+          name?: string | null
+          session_id: string
+        }
+        Update: {
+          created_at?: string
+          disease_of_interest?: string | null
+          id?: string
+          location?: string | null
+          name?: string | null
+          session_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
