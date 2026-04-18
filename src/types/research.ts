@@ -28,3 +28,4 @@ export interface ClinicalTrial {
   contact: string;
   url: string;
 }
+
